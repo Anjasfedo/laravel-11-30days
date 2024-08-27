@@ -4,11 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About</title>
+    <title>Home</title>
 </head>
 
 <body>
-    <h1>Hewroo about</h1>
+    <x-nav-link />
+
+    {{-- <?php echo $slot; ?> --}}
+    {{ $slot }}
 </body>
 
 </html>
