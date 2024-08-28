@@ -1,5 +1,1 @@
-<nav>
-    <a href="/">Home</a>
-    <a href="/about">About</a>
-    <a href="/contact">Contact</a>
-</nav>
+<a {{ $attributes->merge(['class' => 'text-indigo-600']) }}>{{ $slot }}</a>
