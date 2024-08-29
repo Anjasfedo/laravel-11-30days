@@ -29,14 +29,9 @@
                         <div class="hidden md:block">
                             <div class="ml-10 flex items-baseline space-x-4">
                                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                                <a href="/"
-                                    class="rounded-md px-3 py-2 text-sm font-medium {{ request()->routeIs('home') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}"
-
-                                    aria-current="page">Home</a>
-                                <a href="/about"
-                                    class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About</a>
-                                <a href="/contact"
-                                    class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contact</a>
+                                <x-nav-link :active="request()->routeIs('home')" href="{{ route('home') }}">Home</x-nav-link>
+                                <x-nav-link :active="request()->is('about')" href="/about">About</x-nav-link>
+                                <x-nav-link :active="request()->is('contact')" href="/contact">Contact</x-nav-link>
                             </div>
                         </div>
                     </div>
@@ -62,8 +57,7 @@
                                         <span class="absolute -inset-1.5"></span>
                                         <span class="sr-only">Open user menu</span>
                                         <img class="h-8 w-8 rounded-full"
-                                            src="https://laracasts.com/images/lary-ai-face.svg"
-                                            alt="">
+                                            src="https://laracasts.com/images/lary-ai-face.svg" alt="">
                                     </button>
                                 </div>
                                 {{-- <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
@@ -107,18 +101,14 @@
             <div class="md:hidden" id="mobile-menu">
                 <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                     <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                    <a href="/" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
-                        aria-current="page">Home</a>
-                    <a href="/about"
-                        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About</a>
-                    <a href="/contact"
-                        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contact</a>
+                    <x-nav-link :active="request()->routeIs('home')" href="{{ route('home') }}" class="block" :type="'a'">Home</x-nav-link>
+                    <x-nav-link :active="request()->is('about')" href="/about" class="block">About</x-nav-link>
+                    <x-nav-link :active="request()->is('contact')" href="/contact" class="block">Contact</x-nav-link>
                 </div>
                 <div class="border-t border-gray-700 pb-3 pt-4">
                     <div class="flex items-center px-5">
                         <div class="flex-shrink-0">
-                            <img class="h-10 w-10 rounded-full"
-                                src="https://laracasts.com/images/lary-ai-face.svg"
+                            <img class="h-10 w-10 rounded-full" src="https://laracasts.com/images/lary-ai-face.svg"
                                 alt="">
                         </div>
                         <div class="ml-3">
