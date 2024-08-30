@@ -10,6 +10,5 @@
     {{-- <x-slot:slot>
         <h1>Hewroo home</h1>
     </x-slot:slot> --}}
-    <h1>Hewroo home</h1>
-
+    <h1>{{ $greeting }} home</h1>
 </x-layout>

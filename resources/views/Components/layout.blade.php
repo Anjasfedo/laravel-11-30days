@@ -31,6 +31,7 @@
                                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                                 <x-nav-link :active="request()->routeIs('home')" href="{{ route('home') }}">Home</x-nav-link>
                                 <x-nav-link :active="request()->is('about')" href="/about">About</x-nav-link>
+                                <x-nav-link :active="request()->is('jobs')" href="/jobs">Jobs</x-nav-link>
                                 <x-nav-link :active="request()->is('contact')" href="/contact">Contact</x-nav-link>
                             </div>
                         </div>
@@ -102,6 +103,7 @@
                 <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                     <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                     <x-nav-link :active="request()->routeIs('home')" href="{{ route('home') }}" class="block" :type="'a'">Home</x-nav-link>
+                    <x-nav-link :active="request()->is('jobs')" href="/jobs" class="block">Jobs</x-nav-link>
                     <x-nav-link :active="request()->is('about')" href="/about" class="block">About</x-nav-link>
                     <x-nav-link :active="request()->is('contact')" href="/contact" class="block">Contact</x-nav-link>
                 </div>
