@@ -7,4 +7,5 @@
 
     <h2>{{ $job['title'] }}</h2>
     <h3>{{ $job['location'] }}</h3>
+    <h4>{{ $job['salary'] }}</h4>
 </x-layout>

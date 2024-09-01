@@ -6,7 +6,7 @@
     <h1>Hewroo jobs</h1>
     @foreach ($jobs as $job)
     <li>
-        <a href="/jobs/{{ $job['id'] }}"><strong>{{ $job['title'] }}</strong> - {{ $job['location'] }}</a>
+        <a href="/jobs/{{ $job['id'] }}"><strong>{{ $job['title'] }}</strong> - {{ $job['location'] }} - {{ $job['salary'] }}</a>
     </li>
     @endforeach
 </x-layout>
