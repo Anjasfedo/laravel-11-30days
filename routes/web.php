@@ -75,9 +75,12 @@ Route::get('/contact', function () {
 
 // Route::get('/jobs', function () use ($jobs) {
 Route::get('/jobs', function () {
+    $jobs = Job::with('employer')->get(); // eager loading
+    // $jobs = Job::all();
+
     return view('jobs', [
         'greeting' => 'Hewroo',
-        'jobs' => Job::all(),
+        'jobs' => $jobs,
     ]);
 });
 
