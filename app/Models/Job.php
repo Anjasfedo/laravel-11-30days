@@ -11,10 +11,15 @@ class Job extends Model
     use HasFactory;
     protected $table = 'job_listings'; // change the convention
 
-    protected $fillable = [
-        'title',
-        'location',
-        'salary',
+    // protected $fillable = [
+    //     'title',
+    //     'location',
+    //     'salary',
+    //     'employer_id',
+    // ];
+
+    protected $guarded = [
+        'id',
     ];
 
     public function employer()

@@ -78,15 +78,19 @@ Route::get('/jobs', function () {
     // $jobs = Job::all();
     // $jobs = Job::with('employer')->get(); // eager loading
 
-    // $jobs = Job::with('employer')->paginate(3);
-    $jobs = Job::with('employer')->simplePaginate(3);
+    $jobs = Job::with('employer')->latest()->paginate(5);
+    // $jobs = Job::with('employer')->simplePaginate(3);
     // $jobs = Job::with('employer')->cursorPaginate(3);
 
 
-    return view('jobs', [
+    return view('jobs.index', [
         'greeting' => 'Hewroo',
         'jobs' => $jobs,
     ]);
+});
+
+Route::get('jobs/create', function () {
+    return view('jobs.create');
 });
 
 // Route::get('/jobs/{id}', function ($id) use ($jobs) {
@@ -94,7 +98,20 @@ Route::get('/jobs/{id}', function ($id) {
     // $job = \Illuminate\Support\Arr::first(Job::all(), fn($job) => $job['id'] == $id);
     $job = Job::find($id);
 
-    return view('job', [
+    return view('jobs.show', [
         'job' => $job
     ]);
+});
+
+Route::post('/jobs', function () {
+    // validation....
+
+    Job::create([
+        'title' => request('title'),
+        'salary' => request('salary'),
+        'location' => 'Lorem',
+        'employer_id' => 1,
+    ]);
+
+    return redirect('/jobs');
 });
