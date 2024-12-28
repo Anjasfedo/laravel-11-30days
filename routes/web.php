@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JobController;
 use App\Models\Job;
 use Illuminate\Support\Facades\Route;
 
@@ -60,108 +61,133 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-Route::get('/about', function () {
-    // return 'About Laravel';
-    // return [
-    //     'name' => 'Laravel',
-    // ]; // json
+// Route::get('/about', function () {
+//     // return 'About Laravel';
+//     // return [
+//     //     'name' => 'Laravel',
+//     // ]; // json
 
-    return view('about');
-});
+//     return view('about');
+// });
+Route::view('/about', 'about');
 
-Route::get('/contact', function () {
-    return view('contact');
-});
+// Route::get('/contact', function () {
+//     return view('contact');
+// });
+Route::view('/contact', 'contact');
+
+Route::resource('jobs', JobController::class);
+
+// Route::controller(JobController::class)->group(function () {
+//     Route::get('/jobs', 'index');
+//     Route::get('/jobs/create', 'create');
+//     Route::post('/jobs', 'store');
+//     Route::get('/jobs/{job}', 'show');
+//     Route::get('/jobs/{job}/edit', 'edit');
+//     Route::patch('/jobs/{job}', 'update');
+//     Route::delete('/jobs/{job}', 'destroy');
+// });
+
+// Route::get('/jobs', [JobController::class, 'index']);
+// Route::get('/jobs/create', [JobController::class, 'create']);
+// Route::post('/jobs', [JobController::class, 'store']);
+// Route::get('/jobs/{job}', [JobController::class, 'show']);
+// Route::get('/jobs/{job}/edit', [JobController::class, 'edit']);
+// Route::patch('/jobs/{job}', [JobController::class, 'update']);
+// Route::delete('/jobs/{job}', [JobController::class, 'destroy']);
 
 // index
 // Route::get('/jobs', function () use ($jobs) {
-Route::get('/jobs', function () {
-    // $jobs = Job::all();
-    // $jobs = Job::with('employer')->get(); // eager loading
+// Route::get('/jobs', function () {
+//     // $jobs = Job::all();
+//     // $jobs = Job::with('employer')->get(); // eager loading
 
-    $jobs = Job::with('employer')->latest()->paginate(5);
-    // $jobs = Job::with('employer')->simplePaginate(3);
-    // $jobs = Job::with('employer')->cursorPaginate(3);
+//     $jobs = Job::with('employer')->latest()->paginate(5);
+//     // $jobs = Job::with('employer')->simplePaginate(3);
+//     // $jobs = Job::with('employer')->cursorPaginate(3);
 
 
-    return view('jobs.index', [
-        'greeting' => 'Hewroo',
-        'jobs' => $jobs,
-    ]);
-});
+//     return view('jobs.index', [
+//         'greeting' => 'Hewroo',
+//         'jobs' => $jobs,
+//     ]);
+// });
 
-// create
-Route::get('jobs/create', function () {
-    return view('jobs.create');
-});
+// // create
+// Route::get('jobs/create', function () {
+//     return view('jobs.create');
+// });
 
-// show
-// Route::get('/jobs/{id}', function ($id) use ($jobs) {
-Route::get('/jobs/{id}', function ($id) {
-    // $job = \Illuminate\Support\Arr::first(Job::all(), fn($job) => $job['id'] == $id);
-    $job = Job::find($id);
+// // Route::get('/post/{post:slug}')
 
-    return view('jobs.show', [
-        'job' => $job
-    ]);
-});
+// // show
+// // Route::get('/jobs/{id}', function ($id) use ($jobs) {
+// Route::get('/jobs/{job}', function (Job $job) {
+//     // $job = \Illuminate\Support\Arr::first(Job::all(), fn($job) => $job['id'] == $id);
+//     // $job = Job::find($id);
 
-// store
-Route::post('/jobs', function () {
-    // validation....
+//     return view('jobs.show', [
+//         'job' => $job
+//     ]);
+// });
 
-    request()->validate([
-        'title' => 'required|min:3',
-        'salary' => 'required',
-    ]);
+// // store
+// Route::post('/jobs', function () {
+//     // validation....
 
-    Job::create([
-        'title' => request('title'),
-        'salary' => request('salary'),
-        'location' => 'Lorem',
-        'employer_id' => 1,
-    ]);
+//     request()->validate([
+//         'title' => 'required|min:3',
+//         'salary' => 'required',
+//     ]);
 
-    return redirect('/jobs');
-});
+//     Job::create([
+//         'title' => request('title'),
+//         'salary' => request('salary'),
+//         'location' => 'Lorem',
+//         'employer_id' => 1,
+//     ]);
 
-// edit
-Route::get('/jobs/{id}/edit', function ($id) {
-    $job = Job::find($id);
+//     return redirect('/jobs');
+// });
 
-    return view('jobs.edit', [
-        'job' => $job
-    ]);
-});
+// // edit
+// Route::get('/jobs/{job}/edit', function (Job $job) {
+//     // $job = Job::find($id);
 
-// update
-Route::patch('/jobs/{id}', function ($id) {
-    request()->validate([
-        'title' => 'required|min:3',
-        'salary' => 'required',
-    ]);
+//     return view('jobs.edit', [
+//         'job' => $job
+//     ]);
+// });
 
-    $job = Job::findOrFail($id);
+// // update
+// Route::patch('/jobs/{job}', function (Job $job) {
+//     request()->validate([
+//         'title' => 'required|min:3',
+//         'salary' => 'required',
+//     ]);
 
-    $job->title = request('title');
-    $job->salary = request('salary');
-    $job->save();
+//     // $job = Job::findOrFail($id);
 
-    // $job->update([
-    //     'title' => request('title'),
-    //     'salary' => request('salary'),
-    // ]);
+//     $job->title = request('title');
+//     $job->salary = request('salary');
+//     $job->save();
 
-    return redirect('/jobs/' . $job->id);
-});
+//     // $job->update([
+//     //     'title' => request('title'),
+//     //     'salary' => request('salary'),
+//     // ]);
 
-// destroy
-Route::delete('/jobs/{id}', function ($id) {
-    // $job = Job::findOrFail($id);
+//     return redirect('/jobs/' . $job->id);
+// });
 
-    // $job->delete();
+// // destroy
+// Route::delete('/jobs/{job}', function (Job $job) {
+//     // $job = Job::findOrFail($id);
 
-    Job::findOrFail($id)->delete();
+//     // $job->delete();
 
-    return redirect('/jobs');
-});
+//     // Job::findOrFail($id)->delete();
+//     $job->delete();
+
+//     return redirect('/jobs');
+// });
